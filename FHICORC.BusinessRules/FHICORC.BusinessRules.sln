@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FHICORC.BusinessRules.Tests", "FHICORC.BusinessRules.Tests\FHICORC.BusinessRules.Tests.csproj", "{492B4847-DCC3-4F7C-98C8-A0FF2884E404}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{815F81C5-BA4A-496A-BA5A-9A0EBBE9B4CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rules", "Rules", "{09C03A4A-0C90-4A5B-A416-9B6F366CAAAC}"
+	ProjectSection(SolutionItems) = preProject
+		..\Pipeline\Rules\cd-push-rules-pipeline.yml = ..\Pipeline\Rules\cd-push-rules-pipeline.yml
+		..\Pipeline\Rules\cd-rules-release-preprod.yml = ..\Pipeline\Rules\cd-rules-release-preprod.yml
+		..\Pipeline\Rules\cd-rules-release-prod.yml = ..\Pipeline\Rules\cd-rules-release-prod.yml
+		..\Pipeline\Rules\cd-rules-release-test.yml = ..\Pipeline\Rules\cd-rules-release-test.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2B39EA2C-5C28-4309-9346-35CE59C75CD2}"
+	ProjectSection(SolutionItems) = preProject
+		..\Pipeline\Test\ci-build-and-test.yml = ..\Pipeline\Test\ci-build-and-test.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{492B4847-DCC3-4F7C-98C8-A0FF2884E404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{492B4847-DCC3-4F7C-98C8-A0FF2884E404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{492B4847-DCC3-4F7C-98C8-A0FF2884E404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{492B4847-DCC3-4F7C-98C8-A0FF2884E404}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{09C03A4A-0C90-4A5B-A416-9B6F366CAAAC} = {815F81C5-BA4A-496A-BA5A-9A0EBBE9B4CE}
+		{2B39EA2C-5C28-4309-9346-35CE59C75CD2} = {815F81C5-BA4A-496A-BA5A-9A0EBBE9B4CE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02B9CC73-95EB-4246-865E-5732EA4A2322}
+	EndGlobalSection
+EndGlobal
