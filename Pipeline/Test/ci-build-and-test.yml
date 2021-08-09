@@ -1,0 +1,19 @@
+pool:
+  vmImage: 'ubuntu-20.04'
+
+steps:
+  - checkout: self
+
+  - task: DotNetCoreCLI@2
+    displayName: Build solution
+    inputs:
+      command: 'build'
+      projects: 'FHICORC.BusinessRules/FHICORC.BusinessRules.sln'
+      configuration: 'Debug'
+
+  - task: DotNetCoreCLI@2
+    displayName: Run unit tests
+    inputs:
+      command: 'test'
+      projects: 'FHICORC.BusinessRules/FHICORC.BusinessRules.Tests/FHICORC.BusinessRules.Tests.csproj'
+      arguments: '-c Debug --no-restore'
