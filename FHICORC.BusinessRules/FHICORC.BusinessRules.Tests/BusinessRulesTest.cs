@@ -21,6 +21,12 @@ namespace FHICORC.BusinessRules.Tests
         private const int TwoOfTwoMinDays = -7;
         private const int TwoOfTwoMaxDays = -9001; // Currently no max
 
+        private const int ThreeOfTwoMinDays = 0;
+        private const int ThreeOfTwoMaxDays = -9001; // Currently no max
+
+        private const int ThreeOThreeMinDays = 0;
+        private const int ThreeOfThreeMaxDays = -9001; // Currently no max
+
         private const int OneOfOneMinDays = -21;
         private const int OneOfOneTwoOfTwoTypeMinDays = -7;
         private const int OneOfOneMaxDays = -9001; // Currently no max
@@ -358,6 +364,196 @@ namespace FHICORC.BusinessRules.Tests
             var vaccineData = GetVaccineData(OneOfOneMinDays - 1);
             vaccineData.payload.v[0].dn = 1;
             vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "UNKNOWN_TYPE";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Comirnaty valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Comirnaty valid after 0 days")]
+        public void Vaccine_ThreeOfTwoDoses_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "EU/1/20/1528";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Moderna valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Moderna valid after 0 days")]
+        public void Vaccine_ThreeOfTwoDoses_InValidPeriod_Moderna(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "EU/1/20/1507";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Vaxzevria valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Vaxzevria valid after 0 days")]
+        public void Vaccine_ThreeOfTwoDoses_InValidPeriod_Vaxzevria(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "EU/1/21/1529";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of two doses of vaccine not valid before 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of two doses of vaccine not valid before 0 days")]
+        public void Vaccine_ThreeOfTwoDoses_BeforeValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMinDays + 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of two doses of vaccine not valid after max period")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of two doses of vaccine not valid after max period")]
+        [Ignore("No max period for vaccines yet")]
+        public void Vaccine_ThreeOfTwoDoses_AfterValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMaxDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of two doses of unknown vaccine type not valid")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of two doses of unknown vaccine type not valid")]
+        public void Vaccine_ThreeOfTwoDoses_UnknownType(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "UNKNOWN_TYPE";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Comirnaty valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Comirnaty valid after 0 days")]
+        public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
+            vaccineData.payload.v[0].mp = "EU/1/20/1528";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Moderna valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Moderna valid after 0 days")]
+        public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Moderna(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
+            vaccineData.payload.v[0].mp = "EU/1/20/1507";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Vaxzevria valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Vaxzevria valid after 0 days")]
+        public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Vaxzevria(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
+            vaccineData.payload.v[0].mp = "EU/1/21/1529";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of three doses of vaccine not valid before 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of three doses of vaccine not valid before 0 days")]
+        public void Vaccine_ThreeOfThreeDoses_BeforeValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOThreeMinDays + 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of three doses of vaccine not valid after max period")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of three doses of vaccine not valid after max period")]
+        [Ignore("No max period for vaccines yet")]
+        public void Vaccine_ThreeOfThreeDoses_AfterValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfThreeMaxDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of three doses of unknown vaccine type not valid")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of three doses of unknown vaccine type not valid")]
+        public void Vaccine_ThreeOfThreeDoses_UnknownType(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
             vaccineData.payload.v[0].mp = "UNKNOWN_TYPE";
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);

@@ -24,11 +24,20 @@
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
     "ValidTo": "2030-01-01T00:00:00Z",
-    "AffectedFields": [ "v.0.mp" ],
+    "AffectedFields": [
+      "v.0.mp"
+    ],
     "Logic": {
       "in": [
-        { "var": "payload.v.0.mp" },
-        [ "EU/1/20/1528", "EU/1/20/1507", "EU/1/20/1525", "EU/1/21/1529" ]
+        {
+          "var": "payload.v.0.mp"
+        },
+        [
+          "EU/1/20/1528",
+          "EU/1/20/1507",
+          "EU/1/20/1525",
+          "EU/1/21/1529"
+        ]
       ]
     }
   },
@@ -57,20 +66,29 @@
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
     "ValidTo": "2030-01-01T00:00:00Z",
-    "AffectedFields": [ "v.0.dn", "v.0.sd", "v.0.mp", "v.0.dt" ],
+    "AffectedFields": [
+      "v.0.dn",
+      "v.0.sd",
+      "v.0.mp",
+      "v.0.dt"
+    ],
     "Logic": {
       "if": [
         {
           "and": [
             {
               "===": [
-                { "var": "payload.v.0.dn" },
+                {
+                  "var": "payload.v.0.dn"
+                },
                 1
               ]
             },
             {
               "===": [
-                { "var": "payload.v.0.sd" },
+                {
+                  "var": "payload.v.0.sd"
+                },
                 1
               ]
             }
@@ -80,22 +98,32 @@
           "if": [
             {
               "in": [
-                { "var": "payload.v.0.mp" },
-                [ "EU/1/20/1528", "EU/1/20/1507", "EU/1/21/1529" ]
+                {
+                  "var": "payload.v.0.mp"
+                },
+                [
+                  "EU/1/20/1528",
+                  "EU/1/20/1507",
+                  "EU/1/21/1529"
+                ]
               ]
             },
             {
               "after": [
                 {
                   "plusTime": [
-                    { "var": "external.validationClock" },
+                    {
+                      "var": "external.validationClock"
+                    },
                     0,
                     "day"
                   ]
                 },
                 {
                   "plusTime": [
-                    { "var": "payload.v.0.dt" },
+                    {
+                      "var": "payload.v.0.dt"
+                    },
                     7,
                     "day"
                   ]
@@ -106,14 +134,18 @@
               "after": [
                 {
                   "plusTime": [
-                    { "var": "external.validationClock" },
+                    {
+                      "var": "external.validationClock"
+                    },
                     0,
                     "day"
                   ]
                 },
                 {
                   "plusTime": [
-                    { "var": "payload.v.0.dt" },
+                    {
+                      "var": "payload.v.0.dt"
+                    },
                     21,
                     "day"
                   ]
@@ -128,13 +160,17 @@
               "and": [
                 {
                   "===": [
-                    { "var": "payload.v.0.dn" },
+                    {
+                      "var": "payload.v.0.dn"
+                    },
                     2
                   ]
                 },
                 {
                   "===": [
-                    { "var": "payload.v.0.sd" },
+                    {
+                      "var": "payload.v.0.sd"
+                    },
                     2
                   ]
                 }
@@ -144,14 +180,18 @@
               "after": [
                 {
                   "plusTime": [
-                    { "var": "external.validationClock" },
+                    {
+                      "var": "external.validationClock"
+                    },
                     0,
                     "day"
                   ]
                 },
                 {
                   "plusTime": [
-                    { "var": "payload.v.0.dt" },
+                    {
+                      "var": "payload.v.0.dt"
+                    },
                     7,
                     "day"
                   ]
@@ -164,13 +204,17 @@
                   "and": [
                     {
                       "===": [
-                        { "var": "payload.v.0.dn" },
+                        {
+                          "var": "payload.v.0.dn"
+                        },
                         1
                       ]
                     },
                     {
                       "===": [
-                        { "var": "payload.v.0.sd" },
+                        {
+                          "var": "payload.v.0.sd"
+                        },
                         2
                       ]
                     }
@@ -180,28 +224,126 @@
                   "after": [
                     {
                       "plusTime": [
-                        { "var": "payload.v.0.dt" },
+                        {
+                          "var": "payload.v.0.dt"
+                        },
                         98,
                         "day"
                       ]
                     },
                     {
                       "plusTime": [
-                        { "var": "external.validationClock" },
+                        {
+                          "var": "external.validationClock"
+                        },
                         0,
                         "day"
                       ]
                     },
                     {
                       "plusTime": [
-                        { "var": "payload.v.0.dt" },
+                        {
+                          "var": "payload.v.0.dt"
+                        },
                         21,
                         "day"
                       ]
                     }
                   ]
                 },
-                false
+                {
+                  "if": [
+                    {
+                      "and": [
+                        {
+                          "===": [
+                            {
+                              "var": "payload.v.0.dn"
+                            },
+                            3
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "payload.v.0.sd"
+                            },
+                            2
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "not-before": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "if": [
+                        {
+                          "and": [
+                            {
+                              "===": [
+                                {
+                                  "var": "payload.v.0.dn"
+                                },
+                                3
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "payload.v.0.sd"
+                                },
+                                3
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "not-before": [
+                            {
+                              "plusTime": [
+                                {
+                                  "var": "external.validationClock"
+                                },
+                                0,
+                                "day"
+                              ]
+                            },
+                            {
+                              "plusTime": [
+                                {
+                                  "var": "payload.v.0.dt"
+                                },
+                                0,
+                                "day"
+                              ]
+                            }
+                          ]
+                        },
+                        false
+                      ]
+                    }
+                  ]
+                }
               ]
             }
           ]
@@ -234,20 +376,64 @@
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
     "ValidTo": "2030-01-01T00:00:00Z",
-    "AffectedFields": [ "t.0.tt", "t.0.ma" ],
+    "AffectedFields": [
+      "t.0.tt",
+      "t.0.ma"
+    ],
     "Logic": {
       "if": [
         {
           "===": [
-            { "var": "payload.t.0.tt" },
+            {
+              "var": "payload.t.0.tt"
+            },
             "LP6464-4"
           ]
         },
         true,
         {
           "in": [
-            { "var": "payload.t.0.ma" },
-            [ "1833", "1232", "1468", "2108", "1304", "1870", "1331", "1223", "1173", "1919", "1375", "1144", "1437", "1257", "1363", "1767", "1263", "1333", "1267", "1268", "1180", "1481", "1162", "308", "1097", "1606", "1604", "1489", "344", "345", "2017", "1769", "1218", "1466", "1278", "1343" ]
+            {
+              "var": "payload.t.0.ma"
+            },
+            [
+              "1833",
+              "1232",
+              "1468",
+              "2108",
+              "1304",
+              "1870",
+              "1331",
+              "1223",
+              "1173",
+              "1919",
+              "1375",
+              "1144",
+              "1437",
+              "1257",
+              "1363",
+              "1767",
+              "1263",
+              "1333",
+              "1267",
+              "1268",
+              "1180",
+              "1481",
+              "1162",
+              "308",
+              "1097",
+              "1606",
+              "1604",
+              "1489",
+              "344",
+              "345",
+              "2017",
+              "1769",
+              "1218",
+              "1466",
+              "1278",
+              "1343"
+            ]
           ]
         }
       ]
@@ -278,19 +464,25 @@
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
     "ValidTo": "2030-01-01T00:00:00Z",
-    "AffectedFields": [ "t.0.sc" ],
+    "AffectedFields": [
+      "t.0.sc"
+    ],
     "Logic": {
       "before": [
         {
           "plusTime": [
-            { "var": "external.validationClock" },
+            {
+              "var": "external.validationClock"
+            },
             0,
             "day"
           ]
         },
         {
           "plusTime": [
-            { "var": "payload.t.0.sc" },
+            {
+              "var": "payload.t.0.sc"
+            },
             24,
             "hour"
           ]
@@ -323,26 +515,34 @@
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
     "ValidTo": "2030-01-01T00:00:00Z",
-    "AffectedFields": [ "r.0.fr" ],
+    "AffectedFields": [
+      "r.0.fr"
+    ],
     "Logic": {
       "after": [
         {
           "plusTime": [
-            { "var": "payload.r.0.fr" },
+            {
+              "var": "payload.r.0.fr"
+            },
             180,
             "day"
           ]
         },
         {
           "plusTime": [
-            { "var": "external.validationClock" },
+            {
+              "var": "external.validationClock"
+            },
             0,
             "day"
           ]
         },
         {
           "plusTime": [
-            { "var": "payload.r.0.fr" },
+            {
+              "var": "payload.r.0.fr"
+            },
             10,
             "day"
           ]
