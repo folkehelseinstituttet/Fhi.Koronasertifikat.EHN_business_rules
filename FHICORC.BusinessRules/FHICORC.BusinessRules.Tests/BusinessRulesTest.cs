@@ -211,6 +211,38 @@ namespace FHICORC.BusinessRules.Tests
             Assert.True(ResultsMatches(results, expectedResults));
         }
 
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Covishield valid after 7 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Covishield valid after 7 days")]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Covishield(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "Covishield";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of CoronaVac valid after 7 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of two doses of CoronaVac valid after 7 days")]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_CoronaVac(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "CoronaVac";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
         [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
             Description = "Two of two doses of vaccine not valid before 7 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
@@ -338,6 +370,38 @@ namespace FHICORC.BusinessRules.Tests
             Assert.True(ResultsMatches(results, expectedResults));
         }
 
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "One of one doses of (usually two dose) Covishield valid after 7 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "One of one doses of (usually two dose) Covishield valid after 7 days")]
+        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_Covishield(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(OneOfOneTwoOfTwoTypeMinDays - 1);
+            vaccineData.payload.v[0].dn = 1;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "Covishield";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "One of one doses of (usually two dose) CoronaVac valid after 7 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "One of one doses of (usually two dose) CoronaVac valid after 7 days")]
+        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_CoronaVac(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(OneOfOneTwoOfTwoTypeMinDays - 1);
+            vaccineData.payload.v[0].dn = 1;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "CoronaVac";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
         [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
             Description = "One of one doses of vaccine not valid after max period")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
@@ -413,6 +477,38 @@ namespace FHICORC.BusinessRules.Tests
             vaccineData.payload.v[0].dn = 3;
             vaccineData.payload.v[0].sd = 2;
             vaccineData.payload.v[0].mp = "EU/1/21/1529";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Covishield valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Covishield valid after 0 days")]
+        public void Vaccine_ThreeOfTwoDoses_InValidPeriod_Covishield(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "Covishield";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of two doses of CoronaVac valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of two doses of CoronaVac valid after 0 days")]
+        public void Vaccine_ThreeOfTwoDoses_InValidPeriod_CoronaVac(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "CoronaVac";
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
 
@@ -508,6 +604,38 @@ namespace FHICORC.BusinessRules.Tests
             vaccineData.payload.v[0].dn = 3;
             vaccineData.payload.v[0].sd = 3;
             vaccineData.payload.v[0].mp = "EU/1/21/1529";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Covishield valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Covishield valid after 0 days")]
+        public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Covishield(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
+            vaccineData.payload.v[0].mp = "Covishield";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of three doses of CoronaVac valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of three doses of CoronaVac valid after 0 days")]
+        public void Vaccine_ThreeOfThreeDoses_InValidPeriod_CoronaVac(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
+            vaccineData.payload.v[0].mp = "CoronaVac";
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
 
