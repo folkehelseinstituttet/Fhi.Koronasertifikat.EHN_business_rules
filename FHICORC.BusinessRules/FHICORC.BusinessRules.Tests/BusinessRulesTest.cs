@@ -274,6 +274,38 @@ namespace FHICORC.BusinessRules.Tests
             Assert.True(ResultsMatches(results, expectedResults));
         }
 
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "One of one doses of Janssen valid after 21 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "One of one doses of Janssen valid after 21 days")]
+        public void Vaccine_TwoOfOneDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(OneOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "One of one doses of Janssen valid after 21 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "One of one doses of Janssen valid after 21 days")]
+        public void Vaccine_ThreeOfOneDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(OneOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.False(ResultsMatches(results, expectedResults));
+        }
+
         [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
             Description = "One of one doses of vaccine not valid before 21 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
