@@ -31,6 +31,9 @@ namespace FHICORC.BusinessRules.Tests
         private const int OneOfOneTwoOfTwoTypeMinDays = -7;
         private const int OneOfOneMaxDays = -9001; // Currently no max
 
+        private const int TwoOfOneMinDays = 0;
+        private const int TwoOfOneMaxDays = -9001; // Currently no max
+
         private const int RecoveryMinDays = -10;
         private const int RecoveryMaxDays = -180; 
 
@@ -268,6 +271,103 @@ namespace FHICORC.BusinessRules.Tests
             vaccineData.payload.v[0].dn = 1;
             vaccineData.payload.v[0].sd = 1;
             vaccineData.payload.v[0].mp = "EU/1/20/1525";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of one doses of Janssen valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of one doses of Janssen valid after 0 days")]
+        public void Vaccine_TwoOfOneDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Janssen valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Janssen valid after 0 days")]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of Janssen not valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of Janssen not valid after 0 days")]
+        public void Vaccine_ThreeOfOneDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of vaccine not valid before 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of vaccine not valid before 0 days")]
+        public void Vaccine_TwoOfOneDoses_BeforeValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays + 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of vaccine not valid after max period")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of vaccine not valid after max period")]
+        [Ignore("No max period for vaccines yet")]
+        public void Vaccine_TwoOfOneDoses_AfterValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of unknown vaccine type not valid")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of unknown vaccine type not valid")]
+        public void Vaccine_TwoOfOneDoses_UnknownType(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "UNKNOWN_TYPE";
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
 
