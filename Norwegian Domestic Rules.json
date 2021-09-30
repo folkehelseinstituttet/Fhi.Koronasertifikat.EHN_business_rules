@@ -36,7 +36,9 @@
           "EU/1/20/1528",
           "EU/1/20/1507",
           "EU/1/20/1525",
-          "EU/1/21/1529"
+          "EU/1/21/1529",
+          "Covishield",
+          "CoronaVac"
         ]
       ]
     }
@@ -104,7 +106,9 @@
                 [
                   "EU/1/20/1528",
                   "EU/1/20/1507",
-                  "EU/1/21/1529"
+                  "EU/1/21/1529",
+                  "Covishield",
+                  "CoronaVac"
                 ]
               ]
             },
@@ -186,7 +190,9 @@
                     [
                       "EU/1/20/1528",
                       "EU/1/20/1507",
-                      "EU/1/21/1529"
+                      "EU/1/21/1529",
+                      "Covishield",
+                      "CoronaVac"
                     ]
                   ]
                 },
@@ -259,32 +265,72 @@
                   ]
                 },
                 {
-                  "after": [
+                  "if": [
                     {
-                      "plusTime": [
+                      "in": [
                         {
-                          "var": "payload.v.0.dt"
+                          "var": "payload.v.0.mp"
                         },
-                        98,
-                        "day"
+                        [
+                          "EU/1/20/1528",
+                          "EU/1/20/1507",
+                          "EU/1/21/1529",
+                          "Covishield",
+                          "CoronaVac"
+                        ]
                       ]
                     },
                     {
-                      "plusTime": [
+                      "after": [
                         {
-                          "var": "external.validationClock"
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            98,
+                            "day"
+                          ]
                         },
-                        0,
-                        "day"
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            21,
+                            "day"
+                          ]
+                        }
                       ]
                     },
                     {
-                      "plusTime": [
+                      "after": [
                         {
-                          "var": "payload.v.0.dt"
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
                         },
-                        21,
-                        "day"
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
                       ]
                     }
                   ]
