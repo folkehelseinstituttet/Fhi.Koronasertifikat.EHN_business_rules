@@ -482,6 +482,54 @@
     }
   },
   {
+    "Identifier": "VR-NX-0003",
+    "Type": "Acceptance",
+    "Country": "NO",
+    "Version": "1.0.0",
+    "SchemaVersion": "1.3.0",
+    "Engine": "CERTLOGIC",
+    "EngineVersion": "0.7.5",
+    "CertificateType": "Vaccination",
+    "Description": [
+      {
+        "lang": "en",
+        "desc": "Invalid COVID-19 certificate"
+      },
+      {
+        "lang": "nb",
+        "desc": "Ugyldig koronasertifikat"
+      },
+      {
+        "lang": "nn",
+        "desc": "Ugyldig koronasertifikat"
+      }
+    ],
+    "ValidFrom": "2021-07-01T00:00:00Z",
+    "ValidTo": "2030-01-01T00:00:00Z",
+    "AffectedFields": [ "v.0.ci" ],
+    "Logic": {
+      "if": [
+        {
+          "in": [
+            { "var": "payload.v.0.ci" },
+            [
+              "URN:UVCI:01:PL:1/AF2AA5873FAF45DFA826B8A01237BDC4",
+              "URN:UVCI:01:FR:T5DWTJYS4ZR8#4",
+              "URN:UVCI:V1:MK:S98KWT17050MEGUGPLGDV2H0CV",
+              "URN:UVCI:V1:MK:SJ27BEBYCOASY3V8PMW0ES5N54",
+              "URN:UVCI:V1:MK:BB6UIUYRSQK21J4MJTD80SYC9H",
+              "URN:UVCI:V1:MK:1BMGOUJNOVI7IRQNBNO04HUMQ1",
+              "URN:UVCI:01:FR:W7V2BE46QSBJ#L"
+            ]
+          ]
+        },
+        false,
+        true
+      ]
+     
+    }
+  },
+  {
     "Identifier": "TR-NX-0001",
     "Type": "Acceptance",
     "Country": "NX",
