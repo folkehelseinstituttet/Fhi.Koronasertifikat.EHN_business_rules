@@ -497,15 +497,15 @@
     "Description": [
       {
         "lang": "en",
-        "desc": "Invalid COVID-19 certificate"
+        "desc": "COVID-19 certificate must be valid"
       },
       {
         "lang": "nb",
-        "desc": "Ugyldig koronasertifikat"
+        "desc": "Koronasertifikat må være gyldig"
       },
       {
         "lang": "nn",
-        "desc": "Ugyldig koronasertifikat"
+        "desc": "Koronasertifikat må vera gyldig"
       }
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
