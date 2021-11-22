@@ -34,7 +34,7 @@ namespace FHICORC.BusinessRules.Tests
         private const int TwoOfOneMinDays = 0;
         private const int TwoOfOneMaxDays = -9001; // Currently no max
 
-        private const int RecoveryMinDays = -10;
+        private const int RecoveryMinDays = -11;
         private const int RecoveryMaxDays = -180; 
 
         private const int TestResultMaxHours = -24;
@@ -664,7 +664,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of Comirnaty valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Three of three doses of Comirnaty valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -680,7 +680,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of Moderna valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Three of three doses of Moderna valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Moderna(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -696,7 +696,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of Vaxzevria valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Three of three doses of Vaxzevria valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Vaxzevria(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -712,7 +712,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of Covishield valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Three of three doses of Covishield valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Covishield(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -728,7 +728,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of CoronaVac valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Three of three doses of CoronaVac valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_CoronaVac(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -790,9 +790,9 @@ namespace FHICORC.BusinessRules.Tests
         }
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
-            Description = "Recovery certificate valid after 10 days and before 180 days")]
+            Description = "Recovery certificate valid after 11 days and before 180 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
-            Description = "Recovery certificate valid after 10 days and before 180 days")]
+            Description = "Recovery certificate valid after 11 days and before 180 days")]
         public void Recovery_InValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var recoveryData = GetRecoveryData(RecoveryMinDays - 1, 0, RecoveryMaxDays);
