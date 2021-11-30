@@ -35,7 +35,7 @@ namespace FHICORC.BusinessRules.Tests
         private const int TwoOfOneMaxDays = -9001; // Currently no max
 
         private const int RecoveryMinDays = -11;
-        private const int RecoveryMaxDays = -180; 
+        private const int RecoveryMaxDays = -181; 
 
         private const int TestResultMaxHours = -24;
 

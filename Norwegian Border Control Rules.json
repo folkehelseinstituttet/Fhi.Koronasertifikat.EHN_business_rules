@@ -463,15 +463,15 @@
     "Description": [
       {
         "lang": "en",
-        "desc": "At least 10 days and at most 180 days must have passed after positive test result"
+        "desc": "At least 11 days and at most 180 days must have passed after positive test result"
       },
       {
         "lang": "nb",
-        "desc": "Minst 10 dager og maksimalt 180 dager må ha gått etter positivt testresultat"
+        "desc": "Minst 11 dager og maksimalt 180 dager må ha gått etter positivt testresultat"
       },
       {
         "lang": "nn",
-        "desc": "Minst 10 dagar og maksimalt 180 dagar må ha gått etter positivt testresultat"
+        "desc": "Minst 11 dagar og maksimalt 180 dagar må ha gått etter positivt testresultat"
       }
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
@@ -482,7 +482,7 @@
         {
           "plusTime": [
             { "var": "payload.r.0.fr" },
-            180,
+            181,
             "day"
           ]
         },
