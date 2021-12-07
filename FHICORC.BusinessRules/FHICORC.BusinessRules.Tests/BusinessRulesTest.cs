@@ -34,8 +34,8 @@ namespace FHICORC.BusinessRules.Tests
         private const int TwoOfOneMinDays = 0;
         private const int TwoOfOneMaxDays = -9001; // Currently no max
 
-        private const int RecoveryMinDays = -10;
-        private const int RecoveryMaxDays = -180; 
+        private const int RecoveryMinDays = -11;
+        private const int RecoveryMaxDays = -181; 
 
         private const int TestResultMaxHours = -24;
 
@@ -107,7 +107,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
             Description = "One of two doses of vaccines are not accepted at border control (even in otherwise valid period)")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "One of two doses of vaccines are accepted domestically in valid period")]
         public void Vaccine_OneOfTwoDoses_InValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -327,7 +327,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Janssen valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Two of two doses of Janssen valid after 0 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -343,7 +343,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
             Description = "Two of one doses of Janssen not valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of one doses of Janssen not valid after 0 days")]
         public void Vaccine_ThreeOfOneDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -790,9 +790,9 @@ namespace FHICORC.BusinessRules.Tests
         }
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
-            Description = "Recovery certificate valid after 10 days and before 180 days")]
+            Description = "Recovery certificate valid after 11 days and before 180 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
-            Description = "Recovery certificate valid after 10 days and before 180 days")]
+            Description = "Recovery certificate valid after 11 days and before 180 days")]
         public void Recovery_InValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var recoveryData = GetRecoveryData(RecoveryMinDays - 1, 0, RecoveryMaxDays);
@@ -858,7 +858,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllFalse,
             Description = "Test certificates are not accepted at border control (after valid period)")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Test certificate not valid after 24 hours")]
         public void TestResult_AfterValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
