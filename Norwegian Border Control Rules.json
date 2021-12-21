@@ -36,7 +36,8 @@
           "Covishield",
           "CoronaVac",
           "BBIBP-CorV",
-          "Covaxin"
+          "Covaxin",
+          "NVX-CoV2373"
         ]
       ]
     }
@@ -108,7 +109,8 @@
                   "Covishield",
                   "CoronaVac",
                   "BBIBP-CorV",
-                  "Covaxin"
+                  "Covaxin",
+                  "NVX-CoV2373"
                 ]
               ]
             },
@@ -194,7 +196,8 @@
                       "Covishield",
                       "CoronaVac",
                       "BBIBP-CorV",
-                      "Covaxin"
+                      "Covaxin",
+                      "NVX-CoV2373"
                     ]
                   ]
                 },
