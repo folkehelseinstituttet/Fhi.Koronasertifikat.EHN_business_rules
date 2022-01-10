@@ -277,7 +277,7 @@
   {
     "Identifier": "VR-NX-0003",
     "Type": "Acceptance",
-    "Country": "NO",
+    "Country": "NX",
     "Version": "1.0.0",
     "SchemaVersion": "1.3.0",
     "Engine": "CERTLOGIC",
@@ -325,7 +325,7 @@
   {
     "Identifier": "TR-NX-0001",
     "Type": "Acceptance",
-    "Country": "NO",
+    "Country": "NX",
     "Version": "1.0.0",
     "SchemaVersion": "1.3.0",
     "Engine": "CERTLOGIC",
