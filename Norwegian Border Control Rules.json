@@ -248,29 +248,21 @@
               ]
             },
             {
+
+
               "if": [
                 {
-                  "and": [
+                  "===": [
                     {
-                      "===": [
-                        {
-                          "var": "payload.v.0.dn"
-                        },
-                        3
-                      ]
+                      "var": "payload.v.0.dn"
                     },
                     {
-                      "===": [
-                        {
-                          "var": "payload.v.0.sd"
-                        },
-                        2
-                      ]
+                      "var": "payload.v.0.sd"
                     }
                   ]
                 },
                 {
-                  "not-before": [
+                  "after": [
                     {
                       "plusTime": [
                         {
@@ -294,27 +286,17 @@
                 {
                   "if": [
                     {
-                      "and": [
+                      ">": [
                         {
-                          "===": [
-                            {
-                              "var": "payload.v.0.dn"
-                            },
-                            3
-                          ]
+                          "var": "payload.v.0.dn"
                         },
                         {
-                          "===": [
-                            {
-                              "var": "payload.v.0.sd"
-                            },
-                            3
-                          ]
+                          "var": "payload.v.0.sd"
                         }
                       ]
                     },
                     {
-                      "not-before": [
+                      "after": [
                         {
                           "plusTime": [
                             {
@@ -335,53 +317,7 @@
                         }
                       ]
                     },
-                    {
-                      "if": [
-                        {
-                          "and": [
-                            {
-                              "===": [
-                                {
-                                  "var": "payload.v.0.dn"
-                                },
-                                2
-                              ]
-                            },
-                            {
-                              "===": [
-                                {
-                                  "var": "payload.v.0.sd"
-                                },
-                                1
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "not-before": [
-                            {
-                              "plusTime": [
-                                {
-                                  "var": "external.validationClock"
-                                },
-                                0,
-                                "day"
-                              ]
-                            },
-                            {
-                              "plusTime": [
-                                {
-                                  "var": "payload.v.0.dt"
-                                },
-                                0,
-                                "day"
-                              ]
-                            }
-                          ]
-                        },
-                        false
-                      ]
-                    }
+                    false
                   ]
                 }
               ]

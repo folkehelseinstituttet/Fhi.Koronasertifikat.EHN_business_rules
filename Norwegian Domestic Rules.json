@@ -179,11 +179,14 @@
             {
               "if": [
                 {
-                  "===": [
+                  "in": [
                     {
                       "var": "payload.v.0.dn"
                     },
-                    3
+                    [
+                      3,
+                      4
+                    ] 
                   ]
                 },
                 {
@@ -225,6 +228,15 @@
                           "var": "payload.v.0.dt"
                         },
                         7,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        270,
                         "day"
                       ]
                     }
