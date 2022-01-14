@@ -54,7 +54,7 @@
     "Description": [
       {
         "lang": "en",
-        "desc": "At least 21 days and not more 270 days (7 if COVID-19 has been contracted) must have passed after vaccine dose 1 of 1, or at least 7 days and not more 270 days must have passed after vaccine dose 2 of 2. 0 days after additional doses (2 of 1, 3 of 2 , etc)."
+        "desc": "At least 21 days and no more than 270 days (7 if COVID-19 has been contracted) must have passed after vaccine dose 1 of 1, or at least 7 days and no more than 270 days must have passed after vaccine dose 2 of 2. 0 days after additional doses (2 of 1, 3 of 2 , etc)."
       },
       {
         "lang": "nb",
