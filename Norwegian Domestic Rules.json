@@ -123,15 +123,6 @@
                 {
                   "plusTime": [
                     {
-                      "var": "external.validationClock"
-                    },
-                    -361,
-                    "day"
-                  ]
-                },
-                {
-                  "plusTime": [
-                    {
                       "var": "payload.v.0.dt"
                     },
                     7,
@@ -151,15 +142,6 @@
             },
             {
               "before": [
-                {
-                  "plusTime": [
-                    {
-                      "var": "external.validationClock"
-                    },
-                    -361,
-                    "day"
-                  ]
-                },
                 {
                   "plusTime": [
                     {
@@ -225,15 +207,6 @@
                 },
                 {
                   "before": [
-                    {
-                      "plusTime": [
-                        {
-                          "var": "external.validationClock"
-                        },
-                        -361,
-                        "day"
-                      ]
-                    },
                     {
                       "plusTime": [
                         {
