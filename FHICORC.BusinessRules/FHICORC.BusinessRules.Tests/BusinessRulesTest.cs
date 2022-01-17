@@ -359,7 +359,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Janssen valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Janssen valid after 0 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -373,7 +373,7 @@ namespace FHICORC.BusinessRules.Tests
             Assert.True(ResultsMatches(results, expectedResults));
         }
 
-        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of one doses of Janssen not valid after 0 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of one doses of Janssen not valid after 0 days")]
