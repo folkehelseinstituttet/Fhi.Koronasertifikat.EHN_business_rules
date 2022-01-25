@@ -277,6 +277,36 @@ namespace FHICORC.BusinessRules.Tests
 
             Assert.True(ResultsMatches(results, expectedResults));
         }
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Nuvaxovid old code valid after 7 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Nuvaxovid old code valid after 7 days")]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Nuvaxovid_old_code(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "NVX-CoV2373";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Nuvaxovid new code valid after 7 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Nuvaxovid new code valid after 7 days")]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Nuvaxovid_new_code(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "EU/1/21/1618";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
             Description = "Two of two doses of vaccine not valid before 7 days")]
