@@ -41,7 +41,8 @@
           "CoronaVac",
           "BBIBP-CorV",
           "Covaxin",
-          "NVX-CoV2373"
+          "NVX-CoV2373",
+          "EU/1/21/1618"
         ]
       ]
     }
@@ -62,11 +63,11 @@
       },
       {
         "lang": "nb",
-        "desc": "Minst 21 dager (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dager må ha passert etter vaksinedose 2 av 2. 0 dager etter ytterligere doser (2 av 1, 3 av 2 eller 3 av 3)."
+        "desc": "Minst 21 dager (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dager må ha gått etter vaksinedose 2 av 2. 0 dager etter ytterligere doser (2 av 1, 3 av 2, osv)."
       },
       {
         "lang": "nn",
-        "desc": "Minst 21 dagar (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dagar må ha passert etter vaksinedose 2 av 2. 0 dagar etter ytterlegare doser (2 av 1, 3 av 2 eller 3 av 3)."
+        "desc": "Minst 21 dagar (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dagar må ha gått etter vaksinedose 2 av 2. 0 dagar etter ytterlegare doser (2 av 1, 3 av 2, osv)."
       }
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
@@ -114,21 +115,13 @@
                   "CoronaVac",
                   "BBIBP-CorV",
                   "Covaxin",
-                  "NVX-CoV2373"
+                  "NVX-CoV2373",
+                  "EU/1/21/1618"
                 ]
               ]
             },
             {
-              "after": [
-                {
-                  "plusTime": [
-                    {
-                      "var": "external.validationClock"
-                    },
-                    0,
-                    "day"
-                  ]
-                },
+              "before": [
                 {
                   "plusTime": [
                     {
@@ -137,11 +130,7 @@
                     7,
                     "day"
                   ]
-                }
-              ]
-            },
-            {
-              "after": [
+                },
                 {
                   "plusTime": [
                     {
@@ -150,13 +139,26 @@
                     0,
                     "day"
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "before": [
                 {
                   "plusTime": [
                     {
                       "var": "payload.v.0.dt"
                     },
                     21,
+                    "day"
+                  ]
+                },
+                {
+                  "plusTime": [
+                    {
+                      "var": "external.validationClock"
+                    },
+                    0,
                     "day"
                   ]
                 }
@@ -167,12 +169,22 @@
         {
           "if": [
             {
-              "===": [
+              "and": [
                 {
-                  "var": "payload.v.0.dn"
+                  "===": [
+                    {
+                      "var": "payload.v.0.dn"
+                    },
+                    2
+                  ]
                 },
                 {
-                  "var": "payload.v.0.sd"
+                  "===": [
+                    {
+                      "var": "payload.v.0.sd"
+                    },
+                    2
+                  ]
                 }
               ]
             },
@@ -181,29 +193,36 @@
                 {
                   "in": [
                     {
-                      "var": "payload.v.0.dn"
+                      "var": "payload.v.0.mp"
                     },
                     [
-                      3,
-                      4
-                    ] 
+                      "EU/1/20/1528",
+                      "EU/1/20/1507",
+                      "EU/1/21/1529",
+                      "Covishield",
+                      "CoronaVac",
+                      "BBIBP-CorV",
+                      "Covaxin",
+                      "NVX-CoV2373",
+                      "EU/1/21/1618"
+                    ]
                   ]
                 },
                 {
-                  "after": [
+                  "before": [
                     {
                       "plusTime": [
                         {
-                          "var": "external.validationClock"
+                          "var": "payload.v.0.dt"
                         },
-                        0,
+                        7,
                         "day"
                       ]
                     },
                     {
                       "plusTime": [
                         {
-                          "var": "payload.v.0.dt"
+                          "var": "external.validationClock"
                         },
                         0,
                         "day"
@@ -227,7 +246,7 @@
                         {
                           "var": "payload.v.0.dt"
                         },
-                        7,
+                        0,
                         "day"
                       ]
                     },
@@ -247,33 +266,86 @@
             {
               "if": [
                 {
-                  ">": [
+                  "in": [
                     {
                       "var": "payload.v.0.dn"
                     },
-                    {
-                      "var": "payload.v.0.sd"
-                    }
+                    [
+                      2,
+                      3,
+                      4
+                    ]
                   ]
                 },
                 {
-                  "after": [
+                  "if": [
                     {
-                      "plusTime": [
+                      "===": [
                         {
-                          "var": "external.validationClock"
+                          "var": "payload.v.0.dn"
                         },
-                        0,
-                        "day"
+                        {
+                          "var": "payload.v.0.sd"
+                        }
                       ]
                     },
                     {
-                      "plusTime": [
+                      "after": [
                         {
-                          "var": "payload.v.0.dt"
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
                         },
-                        0,
-                        "day"
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "if": [
+                        {
+                          ">": [
+                            {
+                              "var": "payload.v.0.dn"
+                            },
+                            {
+                              "var": "payload.v.0.sd"
+                            }
+                          ]
+                        },
+                        {
+                          "after": [
+                            {
+                              "plusTime": [
+                                {
+                                  "var": "external.validationClock"
+                                },
+                                0,
+                                "day"
+                              ]
+                            },
+                            {
+                              "plusTime": [
+                                {
+                                  "var": "payload.v.0.dt"
+                                },
+                                0,
+                                "day"
+                              ]
+                            }
+                          ]
+                        },
+                        false
                       ]
                     }
                   ]
