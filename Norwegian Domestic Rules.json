@@ -59,15 +59,15 @@
     "Description": [
       {
         "lang": "en",
-        "desc": "At least 21 days (7 if COVID-19 has been contracted) must have passed after vaccine dose 1 of 1, or at least 7 days must have passed after vaccine dose 2 of 2. 0 days after additional doses (2 of 1, 3 of 2 or 3 of 3)."
+        "desc": "At least 21 days (7 if COVID-19 has been contracted) must have passed after vaccine dose 1 of 1, or at least 7 days must have passed after vaccine dose 2 of 2. 0 days after additional doses (2 of 1, 3 of 2 , etc)."
       },
       {
         "lang": "nb",
-        "desc": "Minst 21 dager (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dager må ha gått etter vaksinedose 2 av 2. 0 dager etter ytterligere doser (2 av 1, 3 av 2, osv)."
+        "desc": "Minst 21 dager (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dager må ha passert etter vaksinedose 2 av 2. 0 dager etter ytterligere doser (2 av 1, 3 av 2, osv)."
       },
       {
         "lang": "nn",
-        "desc": "Minst 21 dagar (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dagar må ha gått etter vaksinedose 2 av 2. 0 dagar etter ytterlegare doser (2 av 1, 3 av 2, osv)."
+        "desc": "Minst 21 dagar (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dagar må ha passert etter vaksinedose 2 av 2. 0 dagar etter ytterlegare doser (2 av 1, 3 av 2, osv)."
       }
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
@@ -121,7 +121,16 @@
               ]
             },
             {
-              "before": [
+              "after": [
+                {
+                  "plusTime": [
+                    {
+                      "var": "external.validationClock"
+                    },
+                    0,
+                    "day"
+                  ]
+                },
                 {
                   "plusTime": [
                     {
@@ -130,7 +139,11 @@
                     7,
                     "day"
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "after": [
                 {
                   "plusTime": [
                     {
@@ -139,26 +152,13 @@
                     0,
                     "day"
                   ]
-                }
-              ]
-            },
-            {
-              "before": [
+                },
                 {
                   "plusTime": [
                     {
                       "var": "payload.v.0.dt"
                     },
                     21,
-                    "day"
-                  ]
-                },
-                {
-                  "plusTime": [
-                    {
-                      "var": "external.validationClock"
-                    },
-                    0,
                     "day"
                   ]
                 }
@@ -169,22 +169,12 @@
         {
           "if": [
             {
-              "and": [
+              "===": [
                 {
-                  "===": [
-                    {
-                      "var": "payload.v.0.dn"
-                    },
-                    2
-                  ]
+                  "var": "payload.v.0.dn"
                 },
                 {
-                  "===": [
-                    {
-                      "var": "payload.v.0.sd"
-                    },
-                    2
-                  ]
+                  "var": "payload.v.0.sd"
                 }
               ]
             },
@@ -193,41 +183,12 @@
                 {
                   "in": [
                     {
-                      "var": "payload.v.0.mp"
+                      "var": "payload.v.0.dn"
                     },
                     [
-                      "EU/1/20/1528",
-                      "EU/1/20/1507",
-                      "EU/1/21/1529",
-                      "Covishield",
-                      "CoronaVac",
-                      "BBIBP-CorV",
-                      "Covaxin",
-                      "NVX-CoV2373",
-                      "EU/1/21/1618"
-                    ]
-                  ]
-                },
-                {
-                  "before": [
-                    {
-                      "plusTime": [
-                        {
-                          "var": "payload.v.0.dt"
-                        },
-                        7,
-                        "day"
-                      ]
-                    },
-                    {
-                      "plusTime": [
-                        {
-                          "var": "external.validationClock"
-                        },
-                        0,
-                        "day"
-                      ]
-                    }
+                      3,
+                      4
+                    ] 
                   ]
                 },
                 {
@@ -251,92 +212,70 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "after": [
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        0,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "payload.v.0.dt"
+                        },
+                        7,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        270,
+                        "day"
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
               "if": [
                 {
-                  "in": [
+                  ">": [
                     {
                       "var": "payload.v.0.dn"
                     },
-                    [
-                      2,
-                      3,
-                      4
-                    ]
+                    {
+                      "var": "payload.v.0.sd"
+                    }
                   ]
                 },
                 {
-                  "if": [
+                  "after": [
                     {
-                      "===": [
+                      "plusTime": [
                         {
-                          "var": "payload.v.0.dn"
+                          "var": "external.validationClock"
                         },
-                        {
-                          "var": "payload.v.0.sd"
-                        }
+                        0,
+                        "day"
                       ]
                     },
                     {
-                      "after": [
+                      "plusTime": [
                         {
-                          "plusTime": [
-                            {
-                              "var": "external.validationClock"
-                            },
-                            0,
-                            "day"
-                          ]
+                          "var": "payload.v.0.dt"
                         },
-                        {
-                          "plusTime": [
-                            {
-                              "var": "payload.v.0.dt"
-                            },
-                            0,
-                            "day"
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "if": [
-                        {
-                          ">": [
-                            {
-                              "var": "payload.v.0.dn"
-                            },
-                            {
-                              "var": "payload.v.0.sd"
-                            }
-                          ]
-                        },
-                        {
-                          "after": [
-                            {
-                              "plusTime": [
-                                {
-                                  "var": "external.validationClock"
-                                },
-                                0,
-                                "day"
-                              ]
-                            },
-                            {
-                              "plusTime": [
-                                {
-                                  "var": "payload.v.0.dt"
-                                },
-                                0,
-                                "day"
-                              ]
-                            }
-                          ]
-                        },
-                        false
+                        0,
+                        "day"
                       ]
                     }
                   ]
