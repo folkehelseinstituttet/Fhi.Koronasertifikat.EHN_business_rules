@@ -958,6 +958,7 @@ namespace FHICORC.BusinessRules.Tests
             Description = "Test certificates are not accepted at border control (even in otherwise valid period)")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "PCR based test certificate valid before 24 hours")]
+        [Ignore("No accept test")]
         public void TestResult_Pcr_InValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var testData = GetTestData(TestResultMaxHours + 1);
@@ -971,6 +972,7 @@ namespace FHICORC.BusinessRules.Tests
             Description = "Test certificates are not accepted at border control (even in otherwise valid period)")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "RAT based test certificate of accepted manufacturer valid before 24 hours")]
+        [Ignore("No accept test")]
         public void TestResult_Rat_InValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var testData = GetTestData(TestResultMaxHours + 1);
@@ -986,6 +988,7 @@ namespace FHICORC.BusinessRules.Tests
             Description = "Test certificates are not accepted at border control (after valid period)")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Test certificate not valid after 24 hours")]
+        [Ignore("No accept test")]
         public void TestResult_AfterValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var testData = GetTestData(TestResultMaxHours - 1);
