@@ -279,7 +279,7 @@ namespace FHICORC.BusinessRules.Tests
         }
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Nuvaxovid old code valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Two of two doses of Nuvaxovid old code valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Nuvaxovid_old_code(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -294,7 +294,7 @@ namespace FHICORC.BusinessRules.Tests
         }
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Nuvaxovid new code valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Two of two doses of Nuvaxovid new code valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Nuvaxovid_new_code(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -389,7 +389,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Janssen valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Two of two doses of Janssen valid after 0 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Janssen(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -790,7 +790,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of Comirnaty valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Three of three doses of Comirnaty valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -806,7 +806,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of Moderna valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Three of three doses of Moderna valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Moderna(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -822,7 +822,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of Vaxzevria valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Three of three doses of Vaxzevria valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Vaxzevria(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -838,7 +838,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of Covishield valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Three of three doses of Covishield valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Covishield(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -854,7 +854,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of three doses of CoronaVac valid after 0 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Three of three doses of CoronaVac valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_CoronaVac(RuleUse ruleUse, ExpectedResults expectedResults)
         {
