@@ -249,6 +249,15 @@
                         0,
                         "day"
                       ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        270,
+                        "day"
+                      ]
                     }
                   ]
                 }
