@@ -168,7 +168,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Comirnaty valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Comirnaty valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -184,7 +184,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Moderna valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Moderna valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Moderna(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -200,7 +200,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Vaxzevria valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Vaxzevria valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Vaxzevria(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -216,7 +216,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Covishield valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Covishield valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Covishield(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -232,7 +232,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of CoronaVac valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of CoronaVac valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_CoronaVac(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -248,7 +248,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of BBIBPCorV valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of BBIBPCorV valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_BBIBPCorV(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -264,7 +264,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Covaxin valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Covaxin valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Covaxin(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -279,7 +279,7 @@ namespace FHICORC.BusinessRules.Tests
         }
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Nuvaxovid old code valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Nuvaxovid old code valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Nuvaxovid_old_code(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -294,7 +294,7 @@ namespace FHICORC.BusinessRules.Tests
         }
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Two of two doses of Nuvaxovid new code valid after 7 days")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Nuvaxovid new code valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Nuvaxovid_new_code(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -956,7 +956,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllFalse,
             Description = "Test certificates are not accepted at border control (even in otherwise valid period)")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "PCR based test certificate valid before 24 hours")]
         public void TestResult_Pcr_InValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -969,7 +969,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllFalse,
             Description = "Test certificates are not accepted at border control (even in otherwise valid period)")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "RAT based test certificate of accepted manufacturer valid before 24 hours")]
         public void TestResult_Rat_InValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
@@ -984,7 +984,7 @@ namespace FHICORC.BusinessRules.Tests
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllFalse,
             Description = "Test certificates are not accepted at border control (after valid period)")]
-        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Test certificate not valid after 24 hours")]
         public void TestResult_AfterValidPeriod(RuleUse ruleUse, ExpectedResults expectedResults)
         {
