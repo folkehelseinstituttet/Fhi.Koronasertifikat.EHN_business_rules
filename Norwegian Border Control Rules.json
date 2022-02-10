@@ -38,7 +38,8 @@
           "BBIBP-CorV",
           "Covaxin",
           "NVX-CoV2373",
-          "EU/1/21/1618"
+          "EU/1/21/1618",
+          "Covovax"
         ]
       ]
     }
@@ -112,7 +113,8 @@
                   "BBIBP-CorV",
                   "Covaxin",
                   "NVX-CoV2373",
-                  "EU/1/21/1618"
+                  "EU/1/21/1618",
+                  "Covovax"
                 ]
               ]
             },
@@ -218,7 +220,8 @@
                       "BBIBP-CorV",
                       "Covaxin",
                       "NVX-CoV2373",
-                      "EU/1/21/1618"
+                      "EU/1/21/1618",
+                      "Covovax"
                     ]
                   ]
                 },
