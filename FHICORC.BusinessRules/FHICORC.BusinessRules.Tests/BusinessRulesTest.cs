@@ -323,9 +323,9 @@ namespace FHICORC.BusinessRules.Tests
             Assert.True(ResultsMatches(results, expectedResults));
         }
         [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
-            Description = "Two of two doses of Covovax new code valid after 270 days")]
+            Description = "Two of two doses of Covovax new code invalid after 270 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
-            Description = "Two of two doses of Covovax new code valid after 270 days")]
+            Description = "Two of two doses of Covovax new code invalid after 270 days")]
         public void Vaccine_TwoOfTwoDoses_BeforeValidPeriod_270_Covovax(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(-271 + TwoOfTwoMinDays - 1);
@@ -338,10 +338,10 @@ namespace FHICORC.BusinessRules.Tests
             Assert.True(ResultsMatches(results, expectedResults));
         }
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
-            Description = "Two of two doses of Covovax new code valid after 270 days")]
+            Description = "Three of two doses of Covovax new code valid after 270 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
-            Description = "Two of two doses of Covovax new code valid after 270 days")]
-        public void Vaccine_TwoOfTwoDoses_BeforeValidPeriod_270_Covovax_Booster(RuleUse ruleUse, ExpectedResults expectedResults)
+            Description = "Three of two doses of Covovax new code valid after 270 days")]
+        public void Vaccine_ThreeOfTwoDoses_BeforeValidPeriod_270_Covovax_Booster(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(-271 + TwoOfTwoMinDays - 1);
             vaccineData.payload.v[0].dn = 3;
