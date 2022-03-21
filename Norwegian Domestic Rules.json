@@ -60,15 +60,15 @@
     "Description": [
       {
         "lang": "en",
-        "desc": "At least 21 days (7 if COVID-19 has been contracted) must have passed after vaccine dose 1 of 1, or at least 7 days must have passed after vaccine dose 2 of 2. 0 days after additional doses (2 of 1, 3 of 2 , etc)."
+        "desc": "At least 21 days (7 if COVID-19 has been contracted) must have passed after vaccine dose 1 of 1, or at least 7 days must have passed after vaccine dose 2 of 2. 0 days after additional doses (2 of 1, 3 of 2 , etc). 1/1 and 2/2 are valid in 270 days from vaccination."
       },
       {
         "lang": "nb",
-        "desc": "Minst 21 dager (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dager må ha passert etter vaksinedose 2 av 2. 0 dager etter ytterligere doser (2 av 1, 3 av 2, osv)."
+        "desc": "Minst 21 dager (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dager må ha passert etter vaksinedose 2 av 2. 0 dager etter ytterligere doser (2 av 1, 3 av 2, osv). 1/1 og 2/2 er gyldige i 270 dager fra vaksinasjon."
       },
       {
         "lang": "nn",
-        "desc": "Minst 21 dagar (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dagar må ha passert etter vaksinedose 2 av 2. 0 dagar etter ytterlegare doser (2 av 1, 3 av 2, osv)."
+        "desc": "Minst 21 dagar (7 ved gjennomgått covid-19) må ha gått etter vaksinedose 1 av 1, eller minst 7 dagar må ha passert etter vaksinedose 2 av 2. 0 dagar etter ytterlegare doser (2 av 1, 3 av 2, osv). 1/1 og 2/2 er gyldige i 270 dagar frå vaksinasjon."
       }
     ],
     "ValidFrom": "2021-07-01T00:00:00Z",
@@ -129,7 +129,7 @@
                     {
                       "var": "external.validationClock"
                     },
-                    -271,
+                    -264,
                     "day"
                   ]
                 },
@@ -160,7 +160,7 @@
                     {
                       "var": "external.validationClock"
                     },
-                    -271,
+                    -250,
                     "day"
                   ]
                 },
@@ -218,7 +218,7 @@
                         {
                           "var": "external.validationClock"
                         },
-                        -271,
+                        -264,
                         "day"
                       ]
                     },
@@ -249,7 +249,7 @@
                         {
                           "var": "external.validationClock"
                         },
-                        -271,
+                        -264,
                         "day"
                       ]
                     },

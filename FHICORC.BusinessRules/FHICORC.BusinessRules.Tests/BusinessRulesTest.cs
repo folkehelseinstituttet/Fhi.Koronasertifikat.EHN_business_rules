@@ -358,7 +358,7 @@ namespace FHICORC.BusinessRules.Tests
             Description = "Two of two doses of Covovax new code valid after 270 days")]
         public void Vaccine_TwoOfTwoDoses_AfterValidPeriod_270_Covovax(RuleUse ruleUse, ExpectedResults expectedResults)
         {
-            var vaccineData = GetVaccineData(-271 + TwoOfTwoMinDays);
+            var vaccineData = GetVaccineData(-271);
             vaccineData.payload.v[0].dn = 2;
             vaccineData.payload.v[0].sd = 2;
             vaccineData.payload.v[0].mp = "Covovax";
