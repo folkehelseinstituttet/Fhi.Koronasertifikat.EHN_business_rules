@@ -77,7 +77,8 @@
       "v.0.dn",
       "v.0.sd",
       "v.0.mp",
-      "v.0.dt"
+      "v.0.dt",
+      "dob"
     ],
     "Logic": {
       "if": [
@@ -123,111 +124,15 @@
               ]
             },
             {
-              "before": [
-                {
-                  "plusTime": [
-                    {
-                      "var": "external.validationClock"
-                    },
-                    -264,
-                    "day"
-                  ]
-                },
-                {
-                  "plusTime": [
-                    {
-                      "var": "payload.v.0.dt"
-                    },
-                    7,
-                    "day"
-                  ]
-                },
-                {
-                  "plusTime": [
-                    {
-                      "var": "external.validationClock"
-                    },
-                    0,
-                    "day"
-                  ]
-                }
-              ]
-            },
-            {
-              "before": [
-                {
-                  "plusTime": [
-                    {
-                      "var": "external.validationClock"
-                    },
-                    -250,
-                    "day"
-                  ]
-                },
-                {
-                  "plusTime": [
-                    {
-                      "var": "payload.v.0.dt"
-                    },
-                    21,
-                    "day"
-                  ]
-                },
-                {
-                  "plusTime": [
-                    {
-                      "var": "external.validationClock"
-                    },
-                    0,
-                    "day"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "if": [
-            {
-              "===": [
-                {
-                  "var": "payload.v.0.dn"
-                },
-                {
-                  "var": "payload.v.0.sd"
-                }
-              ]
-            },
-            {
               "if": [
-                {
-                  "in": [
-                    {
-                      "var": "payload.v.0.dn"
-                    },
-                    [
-                      3,
-                      4
-                    ] 
-                  ]
-                },
                 {
                   "before": [
                     {
                       "plusTime": [
                         {
-                          "var": "external.validationClock"
+                          "var": "payload.dob"
                         },
-                        -264,
-                        "day"
-                      ]
-                    },
-                    {
-                      "plusTime": [
-                        {
-                          "var": "payload.v.0.dt"
-                        },
-                        7,
+                        6576,
                         "day"
                       ]
                     },
@@ -269,6 +174,294 @@
                         },
                         0,
                         "day"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "before": [
+                    {
+                      "plusTime": [
+                        {
+                          "var": "payload.v.0.dt"
+                        },
+                        7,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        0,
+                        "day"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "if": [
+                {
+                  "before": [
+                    {
+                      "plusTime": [
+                        {
+                          "var": "payload.dob"
+                        },
+                        6576,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        0,
+                        "day"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "before": [
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        -250,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "payload.v.0.dt"
+                        },
+                        21,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        0,
+                        "day"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "before": [
+                    {
+                      "plusTime": [
+                        {
+                          "var": "payload.v.0.dt"
+                        },
+                        21,
+                        "day"
+                      ]
+                    },
+                    {
+                      "plusTime": [
+                        {
+                          "var": "external.validationClock"
+                        },
+                        0,
+                        "day"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "if": [
+            {
+              "===": [
+                {
+                  "var": "payload.v.0.dn"
+                },
+                {
+                  "var": "payload.v.0.sd"
+                }
+              ]
+            },
+            {
+              "if": [
+                {
+                  "in": [
+                    {
+                      "var": "payload.v.0.dn"
+                    },
+                    [
+                      3,
+                      4
+                    ] 
+                  ]
+                },
+                {
+                  "if": [
+                    {
+                      "before": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.dob"
+                            },
+                            6576,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "before": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            -264,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            7,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "before": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            7,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "if": [
+                    {
+                      "before": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.dob"
+                            },
+                            6576,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "before": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            -264,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            7,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "before": [
+                        {
+                          "plusTime": [
+                            {
+                              "var": "payload.v.0.dt"
+                            },
+                            7,
+                            "day"
+                          ]
+                        },
+                        {
+                          "plusTime": [
+                            {
+                              "var": "external.validationClock"
+                            },
+                            0,
+                            "day"
+                          ]
+                        }
                       ]
                     }
                   ]
