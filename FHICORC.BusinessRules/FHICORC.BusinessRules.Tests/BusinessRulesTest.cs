@@ -347,7 +347,7 @@ namespace FHICORC.BusinessRules.Tests
             vaccineData.payload.v[0].dn = 2;
             vaccineData.payload.v[0].sd = 2;
             vaccineData.payload.v[0].mp = "Covovax";
-            vaccineData.payload.dob = DateTime.Today.AddYears(-18).AddDays(-1).ToShortDateString();
+            vaccineData.payload.dob = DateTime.Today.AddYears(-18).ToShortDateString();
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
 
@@ -363,7 +363,7 @@ namespace FHICORC.BusinessRules.Tests
             vaccineData.payload.v[0].dn = 1;
             vaccineData.payload.v[0].sd = 1;
             vaccineData.payload.v[0].mp = "EU/1/20/1525";
-            vaccineData.payload.dob = DateTime.Today.AddYears(-18).AddDays(-1).ToShortDateString();
+            vaccineData.payload.dob = DateTime.Today.AddYears(-18).ToShortDateString();
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
 
