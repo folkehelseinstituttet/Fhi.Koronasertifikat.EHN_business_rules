@@ -338,6 +338,70 @@ namespace FHICORC.BusinessRules.Tests
             Assert.True(ResultsMatches(results, expectedResults));
         }
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Covovax new code valid after 270 days only for children")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Covovax new code valid after 270 days only for children")]
+        public void Vaccine_TwoOfTwoDoses_AfterValidPeriod_270_Covovax_children(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(-300);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "Covovax";
+            vaccineData.payload.dob = DateTime.Today.AddYears(-18).ToShortDateString();
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Covovax new code valid after 270 days only for children")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Covovax new code valid after 270 days only for children")]
+        public void Vaccine_TwoOfTwoDoses_AfterValidPeriod_270_Covovax_children_1_1(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(-300);
+            vaccineData.payload.v[0].dn = 1;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+            vaccineData.payload.dob = DateTime.Today.AddYears(-18).ToShortDateString();
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of two doses of Covovax new code invalid after 270 days only for adult")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of two doses of Covovax new code invalid after 270 days only for adult")]
+        public void Vaccine_TwoOfTwoDoses_AfterInValidPeriod_270_Covovax_adult(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(-300);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "Covovax";
+            vaccineData.payload.dob = DateTime.Today.AddYears(-18).AddDays(-2).ToShortDateString();
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of two doses of Covovax new code invalid after 270 days only for adult")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of two doses of Covovax new code invalid after 270 days only for adult")]
+        public void Vaccine_TwoOfTwoDoses_AfterInValidPeriod_270_Covovax_adult_1_1(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(-300);
+            vaccineData.payload.v[0].dn = 1;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "EU/1/20/1525";
+            vaccineData.payload.dob = DateTime.Today.AddYears(-18).AddDays(-2).ToShortDateString();
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "Three of two doses of Covovax new code valid after 270 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Three of two doses of Covovax new code valid after 270 days")]
@@ -1115,7 +1179,7 @@ namespace FHICORC.BusinessRules.Tests
         private static dynamic GetVaccineData(int daysUntilVaccinationDate)
         {
             var template =
-                @"{""payload"":{""ver"":null,""nam"":null,""dob"":""1990-01-01"",""v"":[{""tg"":null,""vp"":null,""mp"":""EU/1/20/1528"",""ma"":null,""dn"":2,""sd"":2,""dt"":""2021-01-01T00:00:00.0000000Z"",""co"":null,""is"":null,""ci"":null}],""t"":null,""r"":null},""external"":{""validationClock"":""2021-01-01T00:00:00.0000000Z"",""ValueSets"":null,""CountryCode"":""NO"",""Exp"":""2021-01-01T00:00:00.0000000Z"",""Iat"":""2021-01-01T00:00:00.0000000Z""}}";
+                @"{""payload"":{""ver"":null,""nam"":null,""dob"":""1970-01-01"",""v"":[{""tg"":null,""vp"":null,""mp"":""EU/1/20/1528"",""ma"":null,""dn"":2,""sd"":2,""dt"":""2022-01-01T00:00:00.0000000Z"",""co"":null,""is"":null,""ci"":null}],""t"":null,""r"":null},""external"":{""validationClock"":""2021-01-01T00:00:00.0000000Z"",""ValueSets"":null,""CountryCode"":""NO"",""Exp"":""2021-01-01T00:00:00.0000000Z"",""Iat"":""2021-01-01T00:00:00.0000000Z""}}";
 
             dynamic vaccineData = JObject.Parse(template);
             vaccineData.payload.v[0].dt = DateTime.UtcNow.AddDays(daysUntilVaccinationDate).ToString("O");
