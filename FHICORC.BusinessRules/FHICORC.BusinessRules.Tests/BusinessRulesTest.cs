@@ -576,6 +576,103 @@ namespace FHICORC.BusinessRules.Tests
             Assert.True(ResultsMatches(results, expectedResults));
         }
 
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "One of one doses of Convidecia valid after 21 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "One of one doses of Convidecia valid after 21 days")]
+        public void Vaccine_OneOfOneDoses_InValidPeriod_Convidecia(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(OneOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 1;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "Convidecia";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of one doses of Convidecia valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of one doses of Convidecia valid after 0 days")]
+        public void Vaccine_TwoOfOneDoses_InValidPeriod_Convidecia(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "Convidecia";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Convidecia valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of two doses of Convidecia valid after 0 days")]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Convidecia(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "Convidecia";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of one doses of Convidecia not valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of one doses of Convidecia not valid after 0 days")]
+        public void Vaccine_ThreeOfOneDoses_InValidPeriod_Convidecia(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "Convidecia";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of vaccine not valid before 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of vaccine not valid before 0 days")]
+        public void Vaccine_TwoOfOneDoses_BeforeValidPeriod_Convidecia(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays + 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "Convidecia";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of vaccine not valid after max period")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Two of one doses of vaccine not valid after max period")]
+        [Ignore("No max period for vaccines yet")]
+        public void Vaccine_TwoOfOneDoses_AfterValidPeriod_Convidecia(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfOneMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "Convidecia";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
         [TestCase(RuleUse.BorderControl, ExpectedResults.AtLeastOneFalse,
             Description = "Two of one doses of unknown vaccine type not valid")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
