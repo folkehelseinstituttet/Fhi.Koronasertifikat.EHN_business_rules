@@ -186,7 +186,7 @@ namespace FHICORC.BusinessRules.Tests
             Description = "Two of two doses of Comirnaty valid after 7 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Two of two doses of Comirnaty valid after 7 days")]
-        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(TwoOfTwoMinDays - 1);
             vaccineData.payload.v[0].dn = 2;
@@ -741,7 +741,7 @@ namespace FHICORC.BusinessRules.Tests
             Description = "One of one doses of (usually two dose) Comirnaty valid after 7 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "One of one doses of (usually two dose) Comirnaty valid after 7 days")]
-        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
+        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(OneOfOneTwoOfTwoTypeMinDays - 1);
             vaccineData.payload.v[0].dn = 1;
@@ -902,7 +902,7 @@ namespace FHICORC.BusinessRules.Tests
             Description = "Three of two doses of Comirnaty valid after 0 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "Three of two doses of Comirnaty valid after 0 days")]
-        public void Vaccine_ThreeOfTwoDoses_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
+        public void Vaccine_ThreeOfTwoDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
             vaccineData.payload.v[0].dn = 3;
@@ -1077,7 +1077,7 @@ namespace FHICORC.BusinessRules.Tests
             Description = "Three of three doses of Comirnaty valid after 0 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
             Description = "Three of three doses of Comirnaty valid after 0 days")]
-        public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Comirnaty(RuleUse ruleUse, ExpectedResults expectedResults)
+        public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
             vaccineData.payload.v[0].dn = 3;
@@ -1335,20 +1335,6 @@ namespace FHICORC.BusinessRules.Tests
                 default:
                     throw new ArgumentOutOfRangeException(nameof(expected), expected, null);
             }
-        }
-
-        private static dynamic GetVaccineData(int daysUntilVaccinationDate)
-        {
-            var template =
-                @"{""payload"":{""ver"":null,""nam"":null,""dob"":""1970-01-01"",""v"":[{""tg"":null,""vp"":null,""mp"":""EU/1/20/1528"",""ma"":null,""dn"":2,""sd"":2,""dt"":""2022-01-01T00:00:00.0000000Z"",""co"":null,""is"":null,""ci"":null}],""t"":null,""r"":null},""external"":{""validationClock"":""2021-01-01T00:00:00.0000000Z"",""ValueSets"":null,""CountryCode"":""NO"",""Exp"":""2021-01-01T00:00:00.0000000Z"",""Iat"":""2021-01-01T00:00:00.0000000Z""}}";
-
-            dynamic vaccineData = JObject.Parse(template);
-            vaccineData.payload.v[0].dt = DateTime.UtcNow.AddDays(daysUntilVaccinationDate).ToString("O");
-            vaccineData.external.validationClock = DateTime.UtcNow;
-            vaccineData.external.Iat = DateTime.UtcNow;
-            vaccineData.external.Exp = DateTime.UtcNow.AddDays(14);
-
-            return vaccineData;
         }
 
         private static dynamic GetVaccineData(int daysUntilVaccinationDate)
