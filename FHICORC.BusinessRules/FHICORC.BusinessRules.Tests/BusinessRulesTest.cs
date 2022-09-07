@@ -183,9 +183,9 @@ namespace FHICORC.BusinessRules.Tests
         }
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
-            Description = "Two of two doses of Comirnaty valid after 7 days")]
+            Description = "Two of two doses of Valneva valid after 7 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
-            Description = "Two of two doses of Comirnaty valid after 7 days")]
+            Description = "Two of two doses of Valneva valid after 7 days")]
         public void Vaccine_TwoOfTwoDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(TwoOfTwoMinDays - 1);
@@ -738,9 +738,9 @@ namespace FHICORC.BusinessRules.Tests
         }
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
-            Description = "One of one doses of (usually two dose) Comirnaty valid after 7 days")]
+            Description = "One of one doses of (usually two dose) Valneva valid after 7 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
-            Description = "One of one doses of (usually two dose) Comirnaty valid after 7 days")]
+            Description = "One of one doses of (usually two dose) Valneva valid after 7 days")]
         public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(OneOfOneTwoOfTwoTypeMinDays - 1);
@@ -899,9 +899,9 @@ namespace FHICORC.BusinessRules.Tests
         }
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
-            Description = "Three of two doses of Comirnaty valid after 0 days")]
+            Description = "Three of two doses of Valneva valid after 0 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
-            Description = "Three of two doses of Comirnaty valid after 0 days")]
+            Description = "Three of two doses of Valneva valid after 0 days")]
         public void Vaccine_ThreeOfTwoDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
@@ -1074,9 +1074,9 @@ namespace FHICORC.BusinessRules.Tests
         }
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
-            Description = "Three of three doses of Comirnaty valid after 0 days")]
+            Description = "Three of three doses of Valneva valid after 0 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
-            Description = "Three of three doses of Comirnaty valid after 0 days")]
+            Description = "Three of three doses of Valneva valid after 0 days")]
         public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
         {
             var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
