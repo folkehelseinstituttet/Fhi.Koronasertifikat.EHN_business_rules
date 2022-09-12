@@ -40,7 +40,8 @@
           "NVX-CoV2373",
           "EU/1/21/1618",
           "Covovax",
-          "Convidecia"
+          "Convidecia",
+          "VLA2001"
         ]
       ]
     }
@@ -116,7 +117,8 @@
                   "Covaxin",
                   "NVX-CoV2373",
                   "EU/1/21/1618",
-                  "Covovax"
+                  "Covovax",
+                  "VLA2001"
                 ]
               ]
             },
@@ -319,7 +321,8 @@
                       "Covaxin",
                       "NVX-CoV2373",
                       "EU/1/21/1618",
-                      "Covovax"
+                      "Covovax",
+                      "VLA2001"
                     ]
                   ]
                 },

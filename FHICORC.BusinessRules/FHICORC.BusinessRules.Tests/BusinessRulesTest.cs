@@ -35,7 +35,7 @@ namespace FHICORC.BusinessRules.Tests
         private const int TwoOfOneMaxDays = -9001; // Currently no max
 
         private const int RecoveryMinDays = -11;
-        private const int RecoveryMaxDays = -181; 
+        private const int RecoveryMaxDays = -181;
 
         private const int TestResultMaxHours = -24;
 
@@ -176,6 +176,22 @@ namespace FHICORC.BusinessRules.Tests
             vaccineData.payload.v[0].dn = 2;
             vaccineData.payload.v[0].sd = 2;
             vaccineData.payload.v[0].mp = "EU/1/20/1528";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Valneva valid after 7 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Two of two doses of Valneva valid after 7 days")]
+        public void Vaccine_TwoOfTwoDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(TwoOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 2;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "VLA2001";
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
 
@@ -722,6 +738,22 @@ namespace FHICORC.BusinessRules.Tests
         }
 
         [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "One of one doses of (usually two dose) Valneva valid after 7 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "One of one doses of (usually two dose) Valneva valid after 7 days")]
+        public void Vaccine_OneOfOneDoses_TwoOfTwoType_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(OneOfOneTwoOfTwoTypeMinDays - 1);
+            vaccineData.payload.v[0].dn = 1;
+            vaccineData.payload.v[0].sd = 1;
+            vaccineData.payload.v[0].mp = "VLA2001";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
             Description = "One of one doses of (usually two dose) Moderna valid after 7 days")]
         [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
             Description = "One of one doses of (usually two dose) Moderna valid after 7 days")]
@@ -860,6 +892,22 @@ namespace FHICORC.BusinessRules.Tests
             vaccineData.payload.v[0].dn = 3;
             vaccineData.payload.v[0].sd = 2;
             vaccineData.payload.v[0].mp = "EU/1/20/1528";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Valneva valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AllTrue,
+            Description = "Three of two doses of Valneva valid after 0 days")]
+        public void Vaccine_ThreeOfTwoDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOfTwoMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 2;
+            vaccineData.payload.v[0].mp = "VLA2001";
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
 
@@ -1019,6 +1067,22 @@ namespace FHICORC.BusinessRules.Tests
             vaccineData.payload.v[0].dn = 3;
             vaccineData.payload.v[0].sd = 3;
             vaccineData.payload.v[0].mp = "EU/1/20/1528";
+
+            var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
+
+            Assert.True(ResultsMatches(results, expectedResults));
+        }
+
+        [TestCase(RuleUse.BorderControl, ExpectedResults.AllTrue,
+            Description = "Three of three doses of Valneva valid after 0 days")]
+        [TestCase(RuleUse.Domestic, ExpectedResults.AtLeastOneFalse,
+            Description = "Three of three doses of Valneva valid after 0 days")]
+        public void Vaccine_ThreeOfThreeDoses_InValidPeriod_Valneva(RuleUse ruleUse, ExpectedResults expectedResults)
+        {
+            var vaccineData = GetVaccineData(ThreeOThreeMinDays - 1);
+            vaccineData.payload.v[0].dn = 3;
+            vaccineData.payload.v[0].sd = 3;
+            vaccineData.payload.v[0].mp = "VLA2001";
 
             var results = RunRules(GetRules(ruleUse, VaccinationRules), (JObject)vaccineData);
 
@@ -1276,7 +1340,7 @@ namespace FHICORC.BusinessRules.Tests
         private static dynamic GetVaccineData(int daysUntilVaccinationDate)
         {
             var template =
-                @"{""payload"":{""ver"":null,""nam"":null,""dob"":""1970-01-01"",""v"":[{""tg"":null,""vp"":null,""mp"":""EU/1/20/1528"",""ma"":null,""dn"":2,""sd"":2,""dt"":""2022-01-01T00:00:00.0000000Z"",""co"":null,""is"":null,""ci"":null}],""t"":null,""r"":null},""external"":{""validationClock"":""2021-01-01T00:00:00.0000000Z"",""ValueSets"":null,""CountryCode"":""NO"",""Exp"":""2021-01-01T00:00:00.0000000Z"",""Iat"":""2021-01-01T00:00:00.0000000Z""}}";
+                @"{""payload"":{""ver"":null,""nam"":null,""dob"":""1970-01-01"",""v"":[{""tg"":null,""vp"":null,""mp"":""VLA2001"",""ma"":null,""dn"":2,""sd"":2,""dt"":""2022-01-01T00:00:00.0000000Z"",""co"":null,""is"":null,""ci"":null}],""t"":null,""r"":null},""external"":{""validationClock"":""2021-01-01T00:00:00.0000000Z"",""ValueSets"":null,""CountryCode"":""NO"",""Exp"":""2021-01-01T00:00:00.0000000Z"",""Iat"":""2021-01-01T00:00:00.0000000Z""}}";
 
             dynamic vaccineData = JObject.Parse(template);
             vaccineData.payload.v[0].dt = DateTime.UtcNow.AddDays(daysUntilVaccinationDate).ToString("O");
